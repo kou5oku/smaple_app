@@ -1,14 +1,28 @@
 $full-width: 710px;
-$background-color: #cff;
+
 $link-color: #09c;
 $visited-link-color: #069;
+
+html {
+  background: url(caldara.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 
 .container {
   width: $full-width;
 }
 
 body {
-  background: $background-color;
+  background: url(caldara.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ 
 }
 
 header {
