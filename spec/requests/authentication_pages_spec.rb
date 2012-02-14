@@ -76,29 +76,40 @@ end
                 specify {response.should redirect_to(root_path)}
             end
         end
-describe "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+       describe "for non-signed-in users" do
+           let(:user) { FactoryGirl.create(:user) }
 
-      describe "when attempting to visit a protected page" do
-        before do
-          visit edit_user_path(user)
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button "Sign in"
+              describe "when attempting to visit a protected page" do
+                before do
+                 visit edit_user_path(user)
+                 fill_in "Email",    with: user.email
+                 fill_in "Password", with: user.password
+                 click_button "Sign in"
+                 end
+
+                describe "after signing in" do
+
+                  it "should render the desired protected page" do
+                     page.should have_selector('title', text: 'Edit user')
+                  end
+                end
+              end
+         end
+        
+        describe "as non-admin user" do
+          let(:user) { FactoryGirl.create(:user)}
+          let(:non_admin) { FactoryGirl.create(:user)}
+
+          before { sign_in non_admin }
+
+           describe "submitting a delete request to the Users#destroy action" do
+            before { delete user_path(user)}
+            specify { response.should redirect_to(root_path)}
+          end
         end
 
-        describe "after signing in" do
-
-          it "should render the desired protected page" do
-            page.should have_selector('title', text: 'Edit user')
-        end
-    end
-end
-end
-
 
     end
 
     end
-
-end
+  end
